@@ -24,4 +24,4 @@ app.get("/search/:searchTerm", (req, res) => {
 });
 
 // Expose Express API as a single Cloud Function:
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region("europe-west1").https.onRequest(app);
