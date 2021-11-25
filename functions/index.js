@@ -1,27 +1,17 @@
-const express = require("express");
-const cors = require("cors");
 const functions = require("firebase-functions");
 const off = require("./off-api.js");
 const search = require("./search.js");
 
-const app = express();
-
-// Automatically allow cross-origin requests
-app.use(cors({origin: true}));
-
-// Bind REST endpoints
-app.get("/product/:id", (req, res) => {
+const baseFunction = functions.region("europe-west1");
+exports.getProduct = baseFunction.https.onCall((data) => {
   // fetch product with specific ID from Open Food Facts
-  off.getProduct(req.params.id)
-      .then((offRes) => res.json(offRes))
-      .catch((err) => res.send(err));
+  return off.getProduct(data.id)
+      .then((offRes) => offRes)
+      .catch((err) => err);
 });
-app.get("/search/:searchTerm", (req, res) => {
+exports.search = baseFunction.https.onCall((data) => {
   // fetch possible products for given search term
-  search.getProductThatStartsWith(req.params.searchTerm)
-      .then((products) => res.json(products))
-      .catch((err) => res.send(err));
+  return search.getProductThatStartsWith(data.searchTerm)
+      .then((products) => products)
+      .catch((err) => err);
 });
-
-// Expose Express API as a single Cloud Function:
-exports.api = functions.region("europe-west1").https.onRequest(app);

@@ -5,6 +5,7 @@ const firestore = app.firestore();
 
 const productsCollection = firestore.collection("products");
 const MAX_SEARCH_RESULTS = 3;
+
 module.exports = {
   getProductThatStartsWith(searchTerm) {
     searchTerm = searchTerm.toLowerCase();
