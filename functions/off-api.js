@@ -8,10 +8,14 @@ module.exports = {
       try {
         request(baseUrl + productId, {json: true}, (err, res, body) => {
           if (err) reject(err);
-          resolve(body);
+          if (typeof body === "object") {
+            resolve(body);
+          } else {
+            reject(new Error("Server response is not JSON data"));
+          }
         });
       } catch (e) {
-        console.error(e);
+        reject(e);
       }
     });
   },
