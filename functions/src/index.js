@@ -7,11 +7,11 @@ exports.getProduct = baseFunction.https.onCall((data) => {
   // fetch product with specific ID from Open Food Facts
   return off.getProduct(data.id)
       .then((offRes) => offRes)
-      .catch((err) => err);
+      .catch((err) => ({error: err.toString()}));
 });
 exports.search = baseFunction.https.onCall((data) => {
   // fetch possible products for given search term
   return search.getProductThatStartsWith(data.searchTerm)
       .then((products) => products)
-      .catch((err) => err);
+      .catch((err) => ({error: err.toString()}));
 });
