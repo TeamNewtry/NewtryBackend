@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
 const app = admin.initializeApp();
@@ -43,7 +44,8 @@ module.exports = {
           // map query snapshots to plain data
           resolve(idProducts.docs.map((snapshot) => snapshot.data()));
         }
-      }).catch((err) => reject(err));
+      }).catch((err) => reject(new functions.https.HttpsError("internal",
+          err.toString())));
     });
   },
 };

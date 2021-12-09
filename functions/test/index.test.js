@@ -10,6 +10,7 @@ const fbFunctions = require("../src/index");
 
 // test getProduct
 const getProduct = test.wrap(fbFunctions.getProduct);
+// valid 20005726
 getProduct({id: 2000572666}).then((productJson) => {
   console.log("getProduct: SUCCESS");
   console.log(productJson);
@@ -22,6 +23,7 @@ getProduct({id: 2000572666}).then((productJson) => {
 
 // test search
 const search = test.wrap(fbFunctions.search);
+// valid 200057
 search({searchTerm: "200057"}).then((searchResultsJson) => {
   console.log("search: SUCCESS");
   console.log(searchResultsJson);

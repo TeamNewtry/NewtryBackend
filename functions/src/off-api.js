@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const request = require("request");
 
 const baseUrl = "https://de-de.openfoodfacts.org/api/v0/product/";
@@ -14,11 +15,11 @@ module.exports = {
             resolve(body);
           } else {
             // eslint-disable-next-line max-len
-            reject(new Error("Server response is no valid product information"));
+            reject(new functions.https.HttpsError("unavailable", "Server response is no valid product information"));
           }
         });
       } catch (e) {
-        reject(e);
+        reject(new functions.https.HttpsError("internal", e.toString()));
       }
     });
   },
