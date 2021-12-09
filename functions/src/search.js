@@ -32,7 +32,8 @@ module.exports = {
 
           productsNamePromise.then((nameProducts) => {
             if (idProducts.empty && nameProducts.empty) {
-              reject(new Error("No matching product found!"));
+              reject(new functions.https.HttpsError("not-found",
+                  "No matching product found!"));
             } else {
               // concat the two results and map query snapshots to plain data
               resolve(idProducts.docs.concat(nameProducts.docs)
