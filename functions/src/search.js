@@ -9,7 +9,7 @@ const MAX_SEARCH_RESULTS = 3;
 
 module.exports = {
   getProductThatStartsWith(searchTerm) {
-    searchTerm = searchTerm.toLowerCase();
+    searchTerm = searchTerm.toString().toLowerCase();
     const searchTermEnd = searchTerm.replace(/.$/,
         (c) => String.fromCharCode(c.charCodeAt(0)+1));
 
