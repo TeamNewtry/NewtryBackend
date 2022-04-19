@@ -9,7 +9,7 @@ const firestore = app.firestore();
 const cacheCollection = firestore.collection("productCache");
 
 // OFF Vars //
-const offTimeout = 3000;
+const offTimeout = 5000;
 const baseUrl = "https://de-de.openfoodfacts.org/api/v0/product/";
 
 function getCachedProduct(productId) {
