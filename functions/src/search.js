@@ -1,9 +1,8 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-const app = admin.initializeApp();
+const app = admin.apps.length ? admin.apps[0] : admin.initializeApp();
 const firestore = app.firestore();
-
 const productsCollection = firestore.collection("products");
 const MAX_SEARCH_RESULTS = 3;
 
