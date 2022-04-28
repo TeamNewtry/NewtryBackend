@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "73f15fee-d9ed-4515-9083-34c9aeb6f5b7",
+		"name": "API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var result = jsonData.result;\r",
+							"pm.environment.set(\"product_code\", result.code); \r",
+							"pm.test(\"Valid product retrieved\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(result.product).to.be.an(\"object\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"id\": \"0000080135876\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/newtry-1/europe-west1/getProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"newtry-1",
+						"europe-west1",
+						"getProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var result = jsonData.result;\r",
+							"pm.test(\"Valid search results retrieved\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(result).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"searchTerm\": \"Nutella\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/newtry-1/europe-west1/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"newtry-1",
+						"europe-west1",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
